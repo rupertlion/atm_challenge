@@ -13,12 +13,12 @@ describe Account do
         expect(subject.pin_code).to eq '1234'
     end
 
-    # it 'account is active' do
-    #     expect(subject.account_status).to eq :active
-    # end
+    it 'account is active' do
+        expect(subject.account_status).to eq :active
+    end
 
-    # it 'account expires in the future' do
-    #     expect(subject.exp_date).to eq '04/20'
-    # end
+    it 'account expires in the future' do
+        expect(subject.exp_date).to eq '04/20'
+    end
 
 end
