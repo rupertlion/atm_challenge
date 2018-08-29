@@ -9,7 +9,7 @@ describe Account do
         expect(subject.name).to eq person
     end
 
-    it 'account is active' do
+    it 'account is :active on initialize' do
         expect(subject.account_status).to eq :active
     end
 
@@ -17,14 +17,15 @@ describe Account do
         expected_date = Date.today.next_year(5).strftime("%m/%y")
         expect(subject.exp_date).to eq expected_date
     end
-    
-    # it 'account expires in the future' do
-    #     expect(subject.exp_date).to eq '04/20'
-    # end
 
     it 'check length of pin_code' do
         pin_code_length = Math.log10(subject.pin_code).to_i + 1
         expect(pin_code_length).to eq 4
+    end
+
+    it 'deactivates account using Instance method' do
+        subject.deactivate
+        expect(subject.account_status).to eq :deactivated
     end
 
 end

@@ -13,6 +13,10 @@ class Account
         @account_status = :active
     end
 
+    def deactivate
+        @account_status = :deactivated
+    end
+
     private
 
     def set_owner(obj)
