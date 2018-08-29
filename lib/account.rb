@@ -1,9 +1,21 @@
 class Account
 
-    attr_accessor :account_owner
+    attr_accessor :pin_code, :exp_date, :account_status, :name
    
-    def initialize
-        @account_owner = account_owner
+    def initialize(attrs = {})
+        @name = set_owner(attrs[:owner])
+        @pin_code = "1234"
+        @exp_date = '04/20'
+        @account_status = :active
     end
 
+     private
+
+    def set_owner(obj)
+        obj == nil ?  missing_owner : @owner = obj
+    end
+
+      def missing_owner
+         raise "An Account owner is required"
+     end
 end
