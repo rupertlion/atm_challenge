@@ -14,7 +14,7 @@ describe Person do
     end
 
     it 'is expected to have a :cash attribute with value of 0 on initialize' do
-        expect(subject.cash).to be eq 0
+        expect(subject.cash).to be_zero
     end
 
     it 'is expected to have a :account attribute' do
