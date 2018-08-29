@@ -19,7 +19,7 @@ describe Atm do
     end
 
     it 'allow funds to be released only if available in account' do
-        expected_output = {status: true, message: 'Success', date: Date.today, amount: 45}
+        expected_output = {status: true, message: 'Success', date: Date.today, amount: 45, bills:[20,20,5]}
         expect(subject.withdraw(45, '1234', account)).to eq expected_output
     end
 
@@ -50,4 +50,5 @@ describe Atm do
         expected_output = {status: false, message: 'Account disabled', date: Date.today}
         expect(subject.withdraw(6, '1234', account)).to eq expected_output
     end  
+    
 end
