@@ -5,9 +5,9 @@ describe Account do
     let(:person) {instance_double('Person', name: 'Thomas')}
     subject { described_class.new({owner: person}) }
 
-    # it 'account has an account owner' do
-    #     expect(subject.account_owner).to eq person
-    # end
+    it 'account has an account owner' do
+        expect(subject.name).to eq person
+    end
 
     it 'account has a pin code' do
         expect(subject.pin_code).to eq '1234'
