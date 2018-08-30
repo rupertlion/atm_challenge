@@ -19,8 +19,8 @@ class Person
         @account == nil ? missing_account : deposit_funds(money)
     end
 
-    def withdraw(withdrawals = {})
-        @account == nil ? missing_account : withdraw_funds(withdrawals)
+    def withdraw(user_entry = {})
+        @account == nil ? missing_account : withdraw_funds(user_entry)
     end
 
 end
@@ -32,11 +32,15 @@ def set_name(obj)
 end
 
 def missing_name
-    raise "A name is required"
+    raise ArgumentError, "A name is required"
 end
 
 def missing_account
-    raise "No account present"
+    raise RuntimeError, "No account present"
+end
+
+def missing_atm
+    raise RuntimeError, "An ATM is required"
 end
 
 def deposit_funds(money)
@@ -44,11 +48,11 @@ def deposit_funds(money)
     @cash -= money
 end
 
-def withdraw_funds(withdrawals)
-    withdrawals[:atm] == nil ? missing_atm : atm = withdrawals[:atm]
+def withdraw_funds(user_entry)
+    user_entry[:atm] == nil ? missing_atm : atm = user_entry[:atm]
     account = @account
-    amount = withdrawals[:amount]
-    pin = withdrawals[:pin]
+    amount = user_entry[:amount]
+    pin = user_entry[:pin]
     response = atm.withdraw(amount, pin, account)
     response[:status] == true ? increase_cash(response) : response
 end
@@ -57,6 +61,3 @@ def increase_cash(response)
     @cash += response[:amount]
 end
 
-def missing_atm
-    raise "An ATM is required"
-end
