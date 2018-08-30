@@ -1,4 +1,5 @@
 require './lib/account.rb'
+require './lib/atm.rb'
 require 'date'
 
 class Person
@@ -18,6 +19,10 @@ class Person
         @account == nil ? missing_account : deposit_funds(money)
     end
 
+    def withdraw(withdrawals = {})
+        @account == nil ? missing_account : withdraw_funds(withdrawals)
+    end
+
 end
 
 private
@@ -27,7 +32,7 @@ def set_name(obj)
 end
 
 def missing_name
-     raise "A name is required"
+    raise "A name is required"
 end
 
 def missing_account
@@ -37,4 +42,21 @@ end
 def deposit_funds(money)
     @account.balance += money
     @cash -= money
+end
+
+def withdraw_funds(withdrawals)
+    withdrawals[:atm] == nil ? missing_atm : atm = withdrawals[:atm]
+    account = @account
+    amount = withdrawals[:amount]
+    pin = withdrawals[:pin]
+    response = atm.withdraw(amount, pin, account)
+    response[:status] == true ? increase_cash(response) : response
+end
+
+def increase_cash(response)
+    @cash += response[:amount]
+end
+
+def missing_atm
+    raise "An ATM is required"
 end
