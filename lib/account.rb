@@ -4,7 +4,7 @@ class Account
 
     STANDARD_VALIDITY_YRS = 5
 
-    attr_accessor :pin_code, :exp_date, :account_status, :name
+    attr_accessor  :name, :pin_code, :exp_date, :account_status
    
     def initialize(attrs = {})
         @name = set_owner(attrs[:owner])
